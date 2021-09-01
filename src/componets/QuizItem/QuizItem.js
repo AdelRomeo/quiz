@@ -1,11 +1,15 @@
 import React from 'react'
 import classes from './QuizItem.module.scss'
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 
 function QuizItem() {
-  return (
-    <li className={classes.QuizItem}>
 
+
+  return (
+    <li>
+      <NavLink to='/question'>
+        На страницу вопроса
+      </NavLink>
     </li>
   )
 }
