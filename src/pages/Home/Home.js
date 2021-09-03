@@ -10,7 +10,6 @@ function Home() {
      <div>
        <QuizList/>
      </div>
-
    </div>
  )
 }

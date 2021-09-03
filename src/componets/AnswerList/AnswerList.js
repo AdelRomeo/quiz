@@ -2,16 +2,14 @@ import React from 'react'
 import AnswerItem from "../QuestionItem/AnswerItem";
 import classes from './AnswerList.module.scss'
 
-function AnswerList() {
-
-  const arr = [1,2,3,4]
+function AnswerList({answerList}) {
 
   return(
     <ul className={classes.AnswerList}>
       {
-        arr.map((ar, i)=>{
+        answerList.map((answer, i)=>{
           return(
-            <AnswerItem key={i}/>
+            <AnswerItem key={i} answer={answer}/>
           )
         })
       }
