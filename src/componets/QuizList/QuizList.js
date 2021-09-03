@@ -1,17 +1,20 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import QuizItem from "../QuizItem/QuizItem";
 import classes from './QuizList.module.scss'
+import QuestionContext from "../../context/question/questionContext";
 
+//список тестов
 function QuizList() {
 
-  const arrLink = [1,2,3,4,5]
+  //список тестов и функция меняющая подгружаемый тест
+  const {testsList, choiceTest} = useContext(QuestionContext)
 
   return (
     <ul className={classes.QuizItem}>
       {
-        arrLink.map((arr, i)=>{
+        testsList.map((arr, i)=>{
           return(
-            <QuizItem key={i}/>
+            <QuizItem key={i} choiceTest={choiceTest} id={i}/>
           )
         })
       }

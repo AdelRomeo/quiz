@@ -1,9 +1,9 @@
 import React from 'react'
 
-function AnswerItem() {
+function AnswerItem({answer}) {
   return(
   <li>
-    <p>вариант ответа</p>
+    <p>{answer}</p>
   </li>
   )
 }

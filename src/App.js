@@ -3,11 +3,12 @@ import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom'
 import './App.css';
 import Home from "./pages/Home/Home";
 import Question from "./pages/Question/Question";
+import QuestionState from "./context/question/questionState";
 
 
 function App() {
   return (
-    <div className="App">
+    <QuestionState>
       <BrowserRouter>
         <Switch>
           <Route path='/question' component={Question}/>
@@ -15,7 +16,7 @@ function App() {
           <Redirect to='/'/>
         </Switch>
       </BrowserRouter>
-    </div>
+    </QuestionState>
   );
 }
 
