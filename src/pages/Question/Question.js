@@ -10,7 +10,7 @@ function Question() {
 
   return(
     <div className={classes.Question}>
-      <div>
+      <div className={classes.QuestionContainer}>
         <p>{testsList[testId].question}</p>
         <AnswerList answerList={testsList[testId].answerList}/>
       </div>

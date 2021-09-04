@@ -10,7 +10,7 @@ function QuizList() {
   const {testsList, choiceTest} = useContext(QuestionContext)
 
   return (
-    <ul className={classes.QuizItem}>
+    <ul className={classes.QuizList}>
       {
         testsList.map((arr, i)=>{
           return(

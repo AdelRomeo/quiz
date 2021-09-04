@@ -1,5 +1,5 @@
 import React from 'react'
-import AnswerItem from "../QuestionItem/AnswerItem";
+import AnswerItem from "../AnswerItem/AnswerItem";
 import classes from './AnswerList.module.scss'
 
 function AnswerList({answerList}) {

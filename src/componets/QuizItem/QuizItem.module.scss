@@ -1,0 +1,11 @@
+.QuizItem{
+  margin-bottom: 12px;
+  font-size: 17px;
+  & > a{
+    color: #ffffff;
+    text-decoration: none;
+    &:hover{
+      color: #d4d2d2;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.AnswerItem{
+  background: #61dafb;
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 17px;
+  &:hover{
+    background: #52ccfc;
+  }
+}
