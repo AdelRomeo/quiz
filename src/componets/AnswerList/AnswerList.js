@@ -5,7 +5,9 @@ import QuestionContext from "../../context/question/questionContext";
 
 function AnswerList() {
 
-  const {testsList, testId} = useContext(QuestionContext)
+  const {testsList, testId, selectedAnswer} = useContext(QuestionContext)
+
+
 
   return(
     <ul className={classes.AnswerList}>

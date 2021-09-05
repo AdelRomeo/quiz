@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import classes from './AnswerItem.module.scss'
 import QuestionContext from "../../context/question/questionContext";
 
-function AnswerItem({idAnswer}) {
+function AnswerItem({idAnswer, stateStale}) {
 
   const {testsList, testId, answerToQuestion, answerFlag} = useContext(QuestionContext)
 
@@ -11,8 +11,6 @@ function AnswerItem({idAnswer}) {
   if (answerFlag){
     cls.push(classes.Success)
   } else cls.push(classes.Error)
-  console.log(answerFlag)
-
 
   return (
     <li className={cls.join(' ')} onClick={() => answerToQuestion(testsList[testId].rightAnswer, idAnswer)}>

@@ -3,7 +3,7 @@ export default function QuestionReducer(state, action) {
     case 'TEST_ID':
       return {...state, testId: action.payload}
     case 'ANSWER_TO_QUESTION':
-      return {...state, answerFlag: action.payload}
+      return {...state, answerFlag: action.payload, selectedAnswer: action.selectedAnswer}
     default:
       return state
   }

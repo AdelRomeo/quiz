@@ -48,15 +48,15 @@ export default function QuestionState({children}) {
   const answerToQuestion = (rightAnswer, selectedAnswer) => {
     dispatch({
       type: 'ANSWER_TO_QUESTION',
-      payload: rightAnswer === selectedAnswer
+      payload: rightAnswer === selectedAnswer,
+      selectedAnswer
     })
-    console.log(rightAnswer, selectedAnswer)
   }
 
-  const {testsList, testId, answerFlag} = state
+  const {testsList, testId, answerFlag, selectedAnswer} = state
 
   return (
-    <QuestionContext.Provider value={{testsList, testId, answerFlag, choiceTest, answerToQuestion}}>
+    <QuestionContext.Provider value={{testsList, testId, answerFlag, selectedAnswer, choiceTest, answerToQuestion}}>
       {children}
     </QuestionContext.Provider>
   )
