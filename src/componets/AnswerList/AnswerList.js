@@ -1,15 +1,19 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import AnswerItem from "../AnswerItem/AnswerItem";
 import classes from './AnswerList.module.scss'
+import QuestionContext from "../../context/question/questionContext";
 
-function AnswerList({answerList}) {
+function AnswerList() {
+
+  const {testsList, testId} = useContext(QuestionContext)
 
   return(
     <ul className={classes.AnswerList}>
       {
-        answerList.map((answer, i)=>{
+        testsList[testId].answerList.map((answer, i)=>{
           return(
-            <AnswerItem key={i} answer={answer}/>
+            <AnswerItem key={i} idAnswer={i}
+            />
           )
         })
       }
