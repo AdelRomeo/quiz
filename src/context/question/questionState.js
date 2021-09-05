@@ -5,17 +5,31 @@ import questionReducer from "./questionReducer";
 export default function QuestionState({children}) {
 
   const initialState = {
+    //список тестов
     testsList: [
       {
+        //вопрос
         question: 'Как дела?',
-        answerList: ['Хорошо', 'Не хорошо', 'Плохо', 'Правильный ответ']
+        //варианты ответа
+        answerList: ['Хорошо', 'Не хорошо', 'Плохо', 'Правильный ответ'],
+        //правильный вариант ответа
+        rightAnswer: 3
       },
       {
+        //вопрос
         question: 'Как дела2?',
-        answerList: ['Хорошо2', 'Не хорошо2', 'Плохо2', 'Правильный ответ2']
+        //варианты ответа
+        answerList: ['Хорошо2', 'Не хорошо2', 'Плохо2', 'Правильный ответ2'],
+        //правильный вариант ответа
+        rightAnswer: 2
       }
     ],
-    testId: [0]
+    //номер теста который будет показан
+    testId: 0,
+    //вариант ответа который выбрали
+    selectedAnswer: null,
+    //флаг правильно ответили или нет
+    answerFlag: false
   }
 
 
@@ -30,10 +44,19 @@ export default function QuestionState({children}) {
     })
   }
 
-  const {testsList, testId} = state
+  //ответ на вопрос
+  const answerToQuestion = (rightAnswer, selectedAnswer) => {
+    dispatch({
+      type: 'ANSWER_TO_QUESTION',
+      payload: rightAnswer === selectedAnswer
+    })
+    console.log(rightAnswer, selectedAnswer)
+  }
+
+  const {testsList, testId, answerFlag} = state
 
   return (
-    <QuestionContext.Provider value={{testsList, testId, choiceTest}}>
+    <QuestionContext.Provider value={{testsList, testId, answerFlag, choiceTest, answerToQuestion}}>
       {children}
     </QuestionContext.Provider>
   )

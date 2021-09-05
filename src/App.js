@@ -11,7 +11,7 @@ function App() {
     <QuestionState>
       <BrowserRouter>
         <Switch>
-          <Route path='/question' component={Question}/>
+          <Route path='/question/:name' component={Question}/>
           <Route path='/' exact component={Home}/>
           <Redirect to='/'/>
         </Switch>
