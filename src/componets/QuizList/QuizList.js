@@ -7,14 +7,14 @@ import QuestionContext from "../../context/question/questionContext";
 function QuizList() {
 
   //список тестов и функция меняющая подгружаемый тест
-  const {testsList, choiceTest} = useContext(QuestionContext)
+  const {testsList, getQuizId} = useContext(QuestionContext)
 
   return (
     <ul className={classes.QuizList}>
       {
         testsList.map((arr, i)=>{
           return(
-            <QuizItem key={i} choiceTest={choiceTest} id={i}/>
+            <QuizItem key={i} getQuizId={getQuizId} id={i}/>
           )
         })
       }
