@@ -2,17 +2,24 @@ import React, {useContext} from 'react'
 import AnswerList from "../../componets/AnswerList/AnswerList";
 import classes from './Question.module.scss'
 import QuestionContext from "../../context/question/questionContext";
+import QuizFinished from "../../componets/QuizFinished/QuizFinished";
 
 function Question() {
 
   //данные из state (список со всеми тестами и номер теста на который кликнули)
-  const {testsList, testId} = useContext(QuestionContext)
+  const {testsList, testId, activeQuestion, quizFinished} = useContext(QuestionContext)
 
-  return(
+  return (
     <div className={classes.Question}>
       <div className={classes.QuestionContainer}>
-        <p>{testsList[testId].question}</p>
-        <AnswerList answerList={testsList[testId].answerList}/>
+        {
+          quizFinished
+            ? <QuizFinished/>
+            : <>
+              <p>{testsList[testId][activeQuestion].question}</p>
+              <AnswerList answerList={testsList[testId].answerList}/>
+            </>
+        }
       </div>
     </div>
   )

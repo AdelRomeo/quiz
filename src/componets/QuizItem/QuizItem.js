@@ -2,10 +2,10 @@ import React from 'react'
 import {NavLink} from "react-router-dom";
 import classes from './QuizItem.module.scss'
 
-function QuizItem({choiceTest, id}) {
+function QuizItem({getQuizId, id}) {
 
   return (
-    <li onClick={()=>choiceTest(id)} className={classes.QuizItem}>
+    <li onClick={()=>getQuizId(id)} className={classes.QuizItem}>
       <NavLink to={`question/${id+1}`}>
         На страницу теста
       </NavLink>
