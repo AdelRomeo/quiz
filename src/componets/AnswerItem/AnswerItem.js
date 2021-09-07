@@ -2,13 +2,13 @@ import React, {useContext} from 'react'
 import classes from './AnswerItem.module.scss'
 import QuestionContext from "../../context/question/questionContext";
 
-function AnswerItem({idAnswer, setCount}) {
+function AnswerItem({idAnswer}) {
 
   const {testsList, testId, answerToQuestion, answerFlag, selectedAnswer, activeQuestion} = useContext(QuestionContext)
 
   const cls = [classes.AnswerItem]
 
-  //если выриант на который кликнули и данный вариант это одно и тоже
+  //если вариант на который кликнули и данный вариант это одно и тоже
   if (selectedAnswer === idAnswer) {
     //если ответили правильно
     if (answerFlag) {
@@ -23,7 +23,7 @@ function AnswerItem({idAnswer, setCount}) {
   const {rightAnswer} = testsList[testId][activeQuestion]
 
   return (
-    <li className={cls.join(' ')} onClick={() => {answerToQuestion(rightAnswer, idAnswer); setCount()}}>
+    <li className={cls.join(' ')} onClick={() => {answerToQuestion(rightAnswer, idAnswer); }}>
       <p>{testsList[testId][activeQuestion].answerList[idAnswer]}</p>
     </li>
   )
