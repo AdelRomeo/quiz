@@ -1,12 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import classes from './QuizFinished.module.scss'
+import QuestionContext from "../../context/question/questionContext";
 
 function QuizFinished() {
+
+  const {testsList, testId, sumRightAnswer } = useContext(QuestionContext)
+
   return (
     <div className={classes.QuizFinished}>
       <h3>Тест окончен</h3>
-      <p>Правильных ответа: 1</p>
-      <p>Не правильных ответа: 2</p>
+      <p>Правильных ответов: {sumRightAnswer}</p>
+      <p>Не правильных ответов: {testsList[testId].length - sumRightAnswer}</p>
     </div>
   )
 }

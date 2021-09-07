@@ -55,7 +55,9 @@ export default function QuestionState({children}) {
     //флаг закончился тест или нет
     quizFinished: false,
     //выбранный тест
-    activeQuiz: null
+    activeQuiz: null,
+    //количество правильных ответов
+    sumRightAnswer: 0
   }
 
 
@@ -71,11 +73,16 @@ export default function QuestionState({children}) {
   }
 
   //ответ на вопрос (клик по варианту ответа)
-  const answerToQuestion = (rightAnswer, selectedAnswer) => {
+  const answerToQuestion = (rightAnswer, selAnswer) => {
+
+    if (rightAnswer === selAnswer){
+      getSumRightAnswer()
+    }
+
     dispatch({
       type: 'ANSWER_TO_QUESTION',
-      payload: rightAnswer === selectedAnswer,
-      selectedAnswer
+      payload: rightAnswer === selAnswer,
+      selAnswer
     })
     nextQuestion()
   }
@@ -101,10 +108,16 @@ export default function QuestionState({children}) {
     })
   }
 
+  //получение количества правильных ответов
+  const getSumRightAnswer = () => {
+    dispatch({
+      type: 'SUM_RIGHT_ANSWER'
+    })
+  }
+
   const {
-    testsList, testId,
-    answerFlag, selectedAnswer,
-    activeQuestion, quizFinished
+    testsList, testId, answerFlag, selectedAnswer,
+    activeQuestion, quizFinished, sumRightAnswer
   } = state
 
   return (
@@ -113,7 +126,8 @@ export default function QuestionState({children}) {
         testsList, testId,
         answerFlag, selectedAnswer,
         activeQuestion, quizFinished,
-        getQuizId, answerToQuestion
+        sumRightAnswer,
+        getQuizId, answerToQuestion,
       }}>
       {children}
     </QuestionContext.Provider>
