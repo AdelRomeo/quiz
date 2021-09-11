@@ -1,0 +1,11 @@
+.selectContainer{
+  text-align: left;
+  margin-bottom: 15px;
+  & label{
+    color: #ffffff;
+    margin-right: 10px;
+  }
+  & select{
+    width: 50px;
+  }
+}
