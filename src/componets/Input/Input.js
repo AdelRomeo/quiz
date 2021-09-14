@@ -2,18 +2,18 @@ import React, {useContext} from 'react'
 import CreateQuizContext from "../../context/createQuiz/createQuizContext";
 import classes from "./Input.module.scss";
 
-function Input({config}) {
+function Input() {
 
-  const {} = useContext(CreateQuizContext)
+  const {changeQuestion, quizItem, activeItem} = useContext(CreateQuizContext)
 
   return (
     //перебираем все перданные элементы объекта
-    Object.keys(config).map((item, index) => {
+    Object.keys(quizItem).map((item, index) => {
 
-      const {type, placeholder} = config[item]
+      const {type, placeholder, value} = quizItem[item]
 
       //если элемент с которым сейчас взаимодействуем и элемент в списке объекта равны
-      if (item === ''){
+      if (item === activeItem) {
         //меняем значение только для него
       }
 
@@ -34,6 +34,8 @@ function Input({config}) {
           className={cls.join(' ')}
           type={type}
           placeholder={placeholder}
+          onChange={(event) => changeQuestion(item, event.target.value)}
+          value={value}
         />
       )
     })
