@@ -8,6 +8,16 @@ export default function CreateQuizState({children}) {
   const initialState = {
     //правильный вариант ответа
     rightAnswerId: 1,
+    value: '',
+    activeItem: null,
+    //пример
+    quizItem: {
+      question: {placeholder: 'Ваш вопрос', type: 'text', value: ''},
+      option1: {placeholder: 'Вариант ответа 1', type: 'text', value: ''},
+      option2: {placeholder: 'Вариант ответа 2', type: 'text', value: ''},
+      option3: {placeholder: 'Вариант ответа 3', type: 'text', value: ''},
+      option4: {placeholder: 'Вариант ответа 4', type: 'text', value: ''},
+    },
   }
 
   const [state, dispatch] = useReducer(CreateQuizReducer, initialState)
@@ -20,11 +30,28 @@ export default function CreateQuizState({children}) {
     })
   }
 
+  const changeQuestion = (item, value) => {
+    //копия всего вопроса из state
+    const quizItemCopy = {...state.quizItem}
+    //один элемент из объекта
+    const element = {...quizItemCopy[item]}
 
-  const {rightAnswerId} = state
+    element.value = value
+
+    quizItemCopy[item] = element
+
+    dispatch({
+      type: 'ADD_QUESTION',
+      value, item, quizItemCopy
+    })
+
+    console.log(quizItem)
+  }
+
+  const {rightAnswerId, activeItem, quizItem} = state
 
   return (
-    <CreateQuizContext.Provider value={{rightAnswerId, setRightAnswerId}}>
+    <CreateQuizContext.Provider value={{rightAnswerId, activeItem, quizItem, setRightAnswerId, changeQuestion}}>
       {children}
     </CreateQuizContext.Provider>
   )

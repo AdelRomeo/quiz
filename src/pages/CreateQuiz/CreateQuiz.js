@@ -11,16 +11,7 @@ function CreateQuiz() {
 
 
   const renderInputs = () => {
-
-    return <Input
-      config={{
-        question: {placeholder: 'Ваш вопрос', type: 'text', value: ''},
-        option1: {placeholder: 'Вариант ответа 1', type: 'text', value: ''},
-        option2: {placeholder: 'Вариант ответа 2', type: 'text', value: ''},
-        option3: {placeholder: 'Вариант ответа 3', type: 'text', value: ''},
-        option4: {placeholder: 'Вариант ответа 4', type: 'text', value: ''},
-      }}
-    />
+    return <Input/>
   }
 
   //конфигурация для рендера <select>

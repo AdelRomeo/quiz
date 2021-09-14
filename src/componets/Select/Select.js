@@ -11,9 +11,9 @@ function Select({config}) {
   return (
     <div className={classes.selectContainer}>
       <label htmlFor="rightAnswerId">{label}</label>
-      <select id='rightAnswerId' onChange={(event)=>setRightAnswerId(event.target.value)}>
+      <select id='rightAnswerId' onChange={(event) => setRightAnswerId(event.target.value)}>
         {Object.keys(options).map((option) => {
-          return(
+          return (
             <option value={options[option]} key={options[option]}>{options[option]}</option>
           )
         })}
