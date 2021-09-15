@@ -7,7 +7,7 @@ import Input from "../../componets/Input/Input";
 
 function CreateQuiz() {
 
-  const {} = useContext(CreateQuizContext)
+  const {createQuestion} = useContext(CreateQuizContext)
 
 
   const renderInputs = () => {
@@ -22,7 +22,7 @@ function CreateQuiz() {
         value1: 1,
         value2: 2,
         value3: 3,
-        value4: 4,
+        value4: 4
       }
     }
     }/>
@@ -30,6 +30,8 @@ function CreateQuiz() {
 
   const onAddHandler = (event) => {
     event.preventDefault()
+
+    createQuestion()
   }
 
   return (

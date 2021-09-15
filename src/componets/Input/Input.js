@@ -4,13 +4,13 @@ import classes from "./Input.module.scss";
 
 function Input() {
 
-  const {changeQuestion, quizItem, activeItem} = useContext(CreateQuizContext)
+  const {changeQuestion, questionItem, activeItem} = useContext(CreateQuizContext)
 
   return (
     //перебираем все перданные элементы объекта
-    Object.keys(quizItem).map((item, index) => {
+    Object.keys(questionItem).map((item, index) => {
 
-      const {type, placeholder, value} = quizItem[item]
+      const {type, placeholder, value} = questionItem[item]
 
       //если элемент с которым сейчас взаимодействуем и элемент в списке объекта равны
       if (item === activeItem) {

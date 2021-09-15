@@ -4,7 +4,13 @@ export default function CreateQuizReducer(state, action) {
       return {...state, rightAnswerId: action.rightId}
     }
     case 'ADD_QUESTION': {
-      return {...state, quizItem: {...action.quizItemCopy}}
+      return {...state, questionItem: {...action.quizItemCopy}}
+    }
+    case 'CREATE_QUIZ_ITEM':{
+      return {...state, quizItem: {...action.question, answerList: action.answerList, rightAnswerId: +action.rightAnswerId}}
+    }
+    case 'RESET_QUIZ': {
+      return {...state, questionItem: action.createTemplate()}
     }
     default:
       return state
