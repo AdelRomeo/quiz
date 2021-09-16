@@ -75,7 +75,7 @@ export default function QuestionState({children}) {
   //ответ на вопрос (клик по варианту ответа)
   const answerToQuestion = (rightAnswer, selAnswer) => {
 
-    if (rightAnswer === selAnswer){
+    if (rightAnswer === selAnswer) {
       getSumRightAnswer()
     }
 
@@ -115,6 +115,13 @@ export default function QuestionState({children}) {
     })
   }
 
+  const addNewTest = (test) => {
+    dispatch({
+      type: 'ADD_NEW_TEST',
+      test
+    })
+  }
+
   const {
     testsList, testId, answerFlag, selectedAnswer,
     activeQuestion, quizFinished, sumRightAnswer
@@ -127,7 +134,7 @@ export default function QuestionState({children}) {
         answerFlag, selectedAnswer,
         activeQuestion, quizFinished,
         sumRightAnswer,
-        getQuizId, answerToQuestion,
+        getQuizId, answerToQuestion, addNewTest
       }}>
       {children}
     </QuestionContext.Provider>

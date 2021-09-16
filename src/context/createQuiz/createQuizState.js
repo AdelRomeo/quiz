@@ -15,7 +15,6 @@ const createTemplate = () => {
 
 export default function CreateQuizState({children}) {
 
-  //один тест со список вопросов
   const initialState = {
     //правильный вариант ответа
     rightAnswerId: 1,
@@ -23,7 +22,10 @@ export default function CreateQuizState({children}) {
     activeItem: null,
     //шаблон вопроса
     questionItem: createTemplate(),
-    quizItem: {}
+    //готовый вопрос
+    quizItem: {},
+    //готовый тест
+    quiz: []
   }
 
   const [state, dispatch] = useReducer(CreateQuizReducer, initialState)
@@ -36,7 +38,7 @@ export default function CreateQuizState({children}) {
     })
   }
 
-  //создание вопроса
+  //изменение вопроса
   const changeQuestion = (item, value) => {
     //копия всего вопроса из state
     const quizItemCopy = {...state.questionItem}
@@ -49,14 +51,16 @@ export default function CreateQuizState({children}) {
     quizItemCopy[item] = element
 
     dispatch({
-      type: 'ADD_QUESTION',
+      type: 'CHANGE_QUESTION',
       value, item, quizItemCopy
     })
   }
 
-  //добавление вопроса в список
+  //создание вопроса
   const createQuestion = () => {
+    //вопрос
     const question = {}
+    //список ответов
     const answerList = []
     Object.keys(questionItem).map((item, index) => {
       //если нолевой элемент - это вопрос
@@ -73,7 +77,15 @@ export default function CreateQuizState({children}) {
       question, answerList, rightAnswerId
     })
 
+    addQuizItem()
     resetQuiz()
+  }
+
+  //добавление вопроса
+  const addQuizItem = () =>{
+    dispatch({
+      type: 'ADD_QUIZ_ITEM'
+    })
   }
 
   //сброс состояние вопроса
@@ -84,10 +96,10 @@ export default function CreateQuizState({children}) {
     })
   }
 
-  const {rightAnswerId, activeItem, questionItem} = state
+  const {rightAnswerId, activeItem, questionItem, quiz} = state
 
   return (
-    <CreateQuizContext.Provider value={{rightAnswerId, activeItem, questionItem, setRightAnswerId, changeQuestion, createQuestion}}>
+    <CreateQuizContext.Provider value={{rightAnswerId, activeItem, questionItem, quiz, setRightAnswerId, changeQuestion, createQuestion}}>
       {children}
     </CreateQuizContext.Provider>
   )
