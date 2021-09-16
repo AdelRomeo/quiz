@@ -15,8 +15,8 @@ function App() {
         <BrowserRouter>
           <Switch>
             <Route path='/question/:name' component={Question}/>
-            <Route path='/ddd' exact component={Home}/>
-            <Route path='/' component={CreateQuiz}/>
+            <Route path='/' exact component={Home}/>
+            <Route path='/createQuiz' component={CreateQuiz}/>
             <Redirect to='/'/>
           </Switch>
         </BrowserRouter>

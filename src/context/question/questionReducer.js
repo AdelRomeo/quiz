@@ -10,6 +10,8 @@ export default function QuestionReducer(state, action) {
       return {...state, selectedAnswer: null, activeQuestion: action.activeQuestion}
     case 'QUIZ_FINISHED':
       return {...state, quizFinished: true}
+    case 'ADD_NEW_TEST':
+      return {...state, testsList: [...state.testsList, action.test]}
     default:
       return state
   }
