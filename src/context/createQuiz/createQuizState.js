@@ -62,7 +62,7 @@ export default function CreateQuizState({children}) {
     const question = {}
     //список ответов
     const answerList = []
-    Object.keys(questionItem).map((item, index) => {
+    Object.keys(questionItem).forEach((item, index) => {
       //если нолевой элемент - это вопрос
       if (index === 0) {
         question[item] = questionItem[item].value
@@ -82,14 +82,14 @@ export default function CreateQuizState({children}) {
   }
 
   //добавление вопроса
-  const addQuizItem = () =>{
+  const addQuizItem = () => {
     dispatch({
       type: 'ADD_QUIZ_ITEM'
     })
   }
 
   //сброс состояние вопроса
-  const resetQuiz = ()=>{
+  const resetQuiz = () => {
     dispatch({
       type: 'RESET_QUIZ',
       createTemplate
@@ -99,7 +99,12 @@ export default function CreateQuizState({children}) {
   const {rightAnswerId, activeItem, questionItem, quiz} = state
 
   return (
-    <CreateQuizContext.Provider value={{rightAnswerId, activeItem, questionItem, quiz, setRightAnswerId, changeQuestion, createQuestion}}>
+    <CreateQuizContext.Provider value={
+      {
+        rightAnswerId, activeItem, questionItem, quiz,
+        setRightAnswerId, changeQuestion, createQuestion
+      }
+    }>
       {children}
     </CreateQuizContext.Provider>
   )

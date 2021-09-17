@@ -1,0 +1,42 @@
+.Drawer {
+  position: absolute;
+  z-index: 999;
+  box-sizing: border-box;
+  max-width: 200px;
+  padding: 100px 40px;
+  height: 100vh;
+  background: #61dafb;
+  transition: left ease 0.7s;
+  & button {
+    margin-left: 160px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #2a2828;
+    font-size: 25px;
+  }
+  & ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  & li{
+    margin-bottom: 15px;
+  }
+  & a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+}
+
+.show {
+  left: 0;
+  & button{
+    transform: rotate(180deg);
+  }
+}
+
+.hide {
+  left: -200px;
+}

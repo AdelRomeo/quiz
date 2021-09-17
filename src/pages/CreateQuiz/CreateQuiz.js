@@ -5,7 +5,6 @@ import CreateQuizContext from "../../context/createQuiz/createQuizContext";
 import Select from "../../componets/Select/Select";
 import Input from "../../componets/Input/Input";
 import QuestionContext from "../../context/question/questionContext";
-import {Link} from "react-router-dom";
 
 function CreateQuiz() {
 
@@ -46,8 +45,7 @@ function CreateQuiz() {
 
   return (
     <article className={classes.CreateQuiz}>
-      <Title/>
-      <Link to='/'>На главную</Link>
+      <Title title='Создайте свой тест'/>
       <form className={classes.Form}>
         {renderInputs()}
         {renderSelect()}
