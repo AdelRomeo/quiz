@@ -1,9 +1,9 @@
 import React from 'react'
 import classes from './Title.module.scss'
 
-function Title() {
+function Title({title}) {
   return(
-    <h1 className={classes.Title}>Список тестов</h1>
+    <h1 className={classes.Title}>{title}</h1>
   )
 }
 
