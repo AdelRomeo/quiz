@@ -20,6 +20,7 @@ function Drawer({showNavBar, setShowNavBar}) {
       <nav>
         <ul>
           <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/'>Home</Link></li>
+          <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/auth'>Auth</Link></li>
           <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/createQuiz'>Create Quiz</Link></li>
         </ul>
       </nav>

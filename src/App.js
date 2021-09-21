@@ -8,6 +8,7 @@ import CreateQuiz from "./pages/CreateQuiz/CreateQuiz";
 import CreateQuizState from "./context/createQuiz/createQuizState";
 import Drawer from "./componets/Drawer/Drawer";
 import Backdrop from "./componets/Backdrop/Backdrop";
+import Auth from "./pages/Auth/Auth";
 
 function App() {
 
@@ -23,6 +24,7 @@ function App() {
             <Route path='/question/:name' component={Question}/>
             <Route path='/' exact component={Home}/>
             <Route path='/createQuiz' component={CreateQuiz}/>
+            <Route path='/auth' component={Auth}/>
             <Redirect to='/'/>
           </Switch>
         </BrowserRouter>
