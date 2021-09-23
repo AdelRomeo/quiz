@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import classes from './CreateQuiz.module.scss'
 import Title from "../../componets/Title/Title";
 import CreateQuizContext from "../../context/createQuiz/createQuizContext";
@@ -9,7 +9,7 @@ import QuestionContext from "../../context/question/questionContext";
 function CreateQuiz() {
 
   const {createQuestion, quiz} = useContext(CreateQuizContext)
-  const {addNewTest, testsList} = useContext(QuestionContext)
+  const {addNewTest} = useContext(QuestionContext)
 
 
   const renderInputs = () => {
@@ -42,37 +42,20 @@ function CreateQuiz() {
     addNewTest(quiz)
   }
 
-  testsList.forEach((item) => {
-    const requestOptions = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(item)
-    };
-
-    fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
-      .then(response => response.json())
-      .then(data => console.log(data))
-  })
-
-  // const requestOptions = {
-  //   method: 'POST',
-  //   headers: {'Content-Type': 'application/json'},
-  //   body: JSON.stringify(testsList)
-  // };
-
   // useEffect(() => {
-  //   fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
-  //     .then(response => response.json()
-  //     )
-  //     .then(data => console.log(data))
+  //   testsList.forEach((item) => {
+  //     const requestOptions = {
+  //       method: 'POST',
+  //       headers: {'Content-Type': 'application/json'},
+  //       body: JSON.stringify(item)
+  //     };
+  //
+  //     fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
+  //       .then(response => response.json())
+  //       .then(data => console.log(data))
+  //   })
   // }, [])
 
-  // useEffect(() => {
-  //   fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json')
-  //     .then(response => response.json()
-  //     )
-  //     .then(data => console.log(data))
-  // }, [])
 
 
   return (

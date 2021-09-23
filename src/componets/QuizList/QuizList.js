@@ -11,13 +11,7 @@ function QuizList() {
 
   return (
     <ul className={classes.QuizList}>
-      {
-        testsList.map((arr, i)=>{
-          return(
-            <QuizItem key={i} getQuizId={getQuizId} id={i}/>
-          )
-        })
-      }
+      {testsList.map((test, i) => (<QuizItem key={i} getQuizId={getQuizId} id={i} name={testsList[i].id}/>))}
     </ul>
   )
 }

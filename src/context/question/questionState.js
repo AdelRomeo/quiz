@@ -6,44 +6,7 @@ export default function QuestionState({children}) {
 
   const initialState = {
     //список тестов
-    testsList: [
-      [
-        {
-          //вопрос
-          question: 'Как дела?',
-          //варианты ответа
-          answerList: ['Хорошо', 'Не хорошо', 'Плохо', 'Правильный ответ'],
-          //правильный вариант ответа
-          rightAnswer: 0
-        },
-        {
-          //вопрос
-          question: 'Как дела?2',
-          //варианты ответа
-          answerList: ['Хорошо', 'Не хорошо', 'Плохо', 'Правильный ответ'],
-          //правильный вариант ответа
-          rightAnswer: 1
-        },
-        {
-          //вопрос
-          question: 'Как дела?3',
-          //варианты ответа
-          answerList: ['Хорошо', 'Не хорошо', 'Плохо', 'Правильный ответ'],
-          //правильный вариант ответа
-          rightAnswer: 2
-        }
-      ],
-      [
-        {
-          //вопрос
-          question: 'Как дела22222?',
-          //варианты ответа
-          answerList: ['Хорошо2', 'Не хорошо2', 'Плохо2', 'Правильный ответ2'],
-          //правильный вариант ответа
-          rightAnswer: 2
-        }
-      ]
-    ],
+    testsList: [],
     //номер теста который будет показан
     testId: 0,
     //вариант ответа который выбрали (цифра)
@@ -57,12 +20,32 @@ export default function QuestionState({children}) {
     //выбранный тест
     activeQuiz: null,
     //количество правильных ответов
-    sumRightAnswer: 0
+    sumRightAnswer: 0,
+    loading: true
   }
 
 
   //расшариваем данные
   const [state, dispatch] = useReducer(questionReducer, initialState)
+
+  //загрузка тестов с сервера
+  const loadingTests = async () => {
+    const testsList = []
+
+    const response = await fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json')
+    const data = await response.json()
+    Object.keys(data).forEach((item) => {
+      testsList.push(data[item])
+      data[item].id = item
+    })
+
+    dispatch({
+      type: 'LOADING_TEST_LIST',
+      testsList
+    })
+
+    setLoading()
+  }
 
   //выбор нужного теста
   const getQuizId = id => {
@@ -115,26 +98,38 @@ export default function QuestionState({children}) {
     })
   }
 
-  const addNewTest = (test) => {
+  //добавление нового теста
+  const addNewTest = async (test) => {
+
+    //объект с конфигурациями для отправки на сервер
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(test)
+    };
+
+    await fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
+  }
+
+  const setLoading = ()=>{
     dispatch({
-      type: 'ADD_NEW_TEST',
-      test
+      type: 'LOADING'
     })
   }
 
   const {
     testsList, testId, answerFlag, selectedAnswer,
-    activeQuestion, quizFinished, sumRightAnswer
+    activeQuestion, quizFinished, sumRightAnswer, loading
   } = state
 
   return (
     <QuestionContext.Provider
       value={{
-        testsList, testId,
-        answerFlag, selectedAnswer,
+        testsList, testId, selectedAnswer,
+        answerFlag, sumRightAnswer, loading,
         activeQuestion, quizFinished,
-        sumRightAnswer,
-        getQuizId, answerToQuestion, addNewTest
+        getQuizId, answerToQuestion,
+        addNewTest, loadingTests
       }}>
       {children}
     </QuestionContext.Provider>
