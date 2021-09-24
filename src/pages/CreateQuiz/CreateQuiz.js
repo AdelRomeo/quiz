@@ -42,22 +42,6 @@ function CreateQuiz() {
     addNewTest(quiz)
   }
 
-  // useEffect(() => {
-  //   testsList.forEach((item) => {
-  //     const requestOptions = {
-  //       method: 'POST',
-  //       headers: {'Content-Type': 'application/json'},
-  //       body: JSON.stringify(item)
-  //     };
-  //
-  //     fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
-  //       .then(response => response.json())
-  //       .then(data => console.log(data))
-  //   })
-  // }, [])
-
-
-
   return (
     <article className={classes.CreateQuiz}>
       <Title title='Создайте свой тест'/>

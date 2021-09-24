@@ -9,27 +9,30 @@ import CreateQuizState from "./context/createQuiz/createQuizState";
 import Drawer from "./componets/Drawer/Drawer";
 import Backdrop from "./componets/Backdrop/Backdrop";
 import Auth from "./pages/Auth/Auth";
+import AuthState from "./context/auth/authState";
 
 function App() {
 
   const [showNavBar, setShowNavBar] = useState(false)
 
   return (
-    <QuestionState>
-      <CreateQuizState>
-        <BrowserRouter>
-          <Drawer showNavBar={showNavBar} setShowNavBar={setShowNavBar}/>
-          {showNavBar ? <Backdrop showNavBar={showNavBar} setShowNavBar={setShowNavBar}/> : null}
-          <Switch>
-            <Route path='/question/:name' component={Question}/>
-            <Route path='/' exact component={Home}/>
-            <Route path='/createQuiz' component={CreateQuiz}/>
-            <Route path='/auth' component={Auth}/>
-            <Redirect to='/'/>
-          </Switch>
-        </BrowserRouter>
-      </CreateQuizState>
-    </QuestionState>
+    <AuthState>
+      <QuestionState>
+        <CreateQuizState>
+          <BrowserRouter>
+            <Drawer showNavBar={showNavBar} setShowNavBar={setShowNavBar}/>
+            {showNavBar ? <Backdrop showNavBar={showNavBar} setShowNavBar={setShowNavBar}/> : null}
+            <Switch>
+              <Route path='/question/:name' component={Question}/>
+              <Route path='/' exact component={Home}/>
+              <Route path='/createQuiz' component={CreateQuiz}/>
+              <Route path='/auth' component={Auth}/>
+              <Redirect to='/'/>
+            </Switch>
+          </BrowserRouter>
+        </CreateQuizState>
+      </QuestionState>
+    </AuthState>
   );
 }
 
