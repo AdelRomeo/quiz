@@ -2,7 +2,7 @@ import React, {useReducer} from 'react'
 import CreateQuizContext from "./createQuizContext";
 import CreateQuizReducer from "./createQuizReducer";
 
-//
+//шаблон теста
 const createTemplate = () => {
   return {
     question: {placeholder: 'Ваш вопрос', type: 'text', value: ''},
