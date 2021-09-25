@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import AuthState from "./context/auth/authState";
 
 ReactDOM.render(
   <>
-    <App />
+    <AuthState>
+      <App />
+    </AuthState>
   </>,
   document.getElementById('root')
 );
