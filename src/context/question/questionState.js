@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react'
+import React, {useEffect, useReducer} from 'react'
 import QuestionContext from "./questionContext";
 import questionReducer from "./questionReducer";
 
@@ -21,12 +21,17 @@ export default function QuestionState({children}) {
     activeQuiz: null,
     //количество правильных ответов
     sumRightAnswer: 0,
+    //показ лоадера на время загрузки
     loading: true
   }
 
 
   //расшариваем данные
   const [state, dispatch] = useReducer(questionReducer, initialState)
+
+  useEffect(()=>{
+    loadingTests()
+  }, [])
 
   //загрузка тестов с сервера
   const loadingTests = async () => {

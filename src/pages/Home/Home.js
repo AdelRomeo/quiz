@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react'
+import React, {useContext} from 'react'
 import classes from './Home.module.scss'
 import Title from "../../componets/Title/Title";
 import QuizList from "../../componets/QuizList/QuizList";
@@ -7,12 +7,7 @@ import QuestionContext from "../../context/question/questionContext";
 
 function Home() {
 
-  const {loadingTests, loading} = useContext(QuestionContext)
-
-  useEffect(() => {
-    loadingTests()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const {loading} = useContext(QuestionContext)
 
   return (
     <div className={classes.Home}>
