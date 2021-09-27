@@ -15,25 +15,38 @@ function App() {
 
   const [showNavBar, setShowNavBar] = useState(false)
 
-  const {autoLogin} = useContext(AuthContext)
+  const {isLogin, logout} = useContext(AuthContext)
 
-  useEffect(()=>{
-    autoLogin()
-  }, [])
+  //если не авторизован
+  let routes = (
+    <Switch>
+      <Route path='/question/:name' component={Question}/>
+      <Route path='/' exact component={Home}/>
+      <Route path='/auth' component={Auth}/>
+      <Redirect to='/'/>
+    </Switch>
+  )
+
+  //если авторизован
+  if (isLogin){
+    routes = (
+      <Switch>
+        <Route path='/question/:name' component={Question}/>
+        <Route path='/' exact component={Home}/>
+        <Route path='/createQuiz' component={CreateQuiz}/>
+        <Redirect to='/'/>
+      </Switch>
+    )
+  }
 
   return (
     <QuestionState>
       <CreateQuizState>
         <BrowserRouter>
-          <Drawer showNavBar={showNavBar} setShowNavBar={setShowNavBar}/>
+          <Drawer showNavBar={showNavBar} setShowNavBar={setShowNavBar} isLogin={isLogin}/>
           {showNavBar ? <Backdrop showNavBar={showNavBar} setShowNavBar={setShowNavBar}/> : null}
-          <Switch>
-            <Route path='/question/:name' component={Question}/>
-            <Route path='/' exact component={Home}/>
-            <Route path='/createQuiz' component={CreateQuiz}/>
-            <Route path='/auth' component={Auth}/>
-            <Redirect to='/'/>
-          </Switch>
+          { routes }
+          <button onClick={logout}>выйти</button>
         </BrowserRouter>
       </CreateQuizState>
     </QuestionState>
