@@ -7,20 +7,20 @@ function Auth() {
   const [valueName, setValueName] = useState('')
   const [valuePas, setValuePas] = useState('')
 
-  const {getDataNewUser, createNewUser, loginUser} = useContext(AuthContext)
+  const {getDataNewUser, loginUser} = useContext(AuthContext)
 
   useEffect(() => {
     getDataNewUser(valueName, valuePas)
   }, [valueName, valuePas])
 
-  const handleNewUser = (event) => {
+  const handlerNewUser = (event) => {
     event.preventDefault()
-    createNewUser()
+    loginUser(false)
   }
 
   const handlerLoginUser = (event) => {
     event.preventDefault()
-    loginUser()
+    loginUser(true)
   }
 
   return (
@@ -30,7 +30,7 @@ function Auth() {
         <input type="text" placeholder='Введите пароль' value={valuePas} onChange={(event) => setValuePas(event.target.value)}/>
         <div>
           <input type="submit" value='Войти' onClick={handlerLoginUser}/>
-          <input type="submit" value='Зарегистрироваться' onClick={handleNewUser}/>
+          <input type="submit" value='Зарегистрироваться' onClick={handlerNewUser}/>
         </div>
       </form>
     </div>

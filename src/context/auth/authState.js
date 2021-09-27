@@ -7,11 +7,23 @@ export default function AuthState({children}) {
   const initialState = {
     email: '',
     password: '',
-    localId: null
+    localId: null,
+    isLogin: false
   }
 
   useEffect(() => {
-    checkLogin()
+    //если в localStorage есть 'time'
+    if (localStorage.getItem('time')) {
+      //pastTime - время которое прошло с момента создания 'time'
+      const pastTime = new Date().getTime() - localStorage.getItem('time')
+      //если прошло больше часа
+      if (pastTime > 3600000) {
+        //разлогиниваемся
+        logout()
+      } else {
+        statusLogin(true)
+      }
+    }
   }, [])
 
   //получение данных из заполненных полей
@@ -22,8 +34,8 @@ export default function AuthState({children}) {
     })
   }
 
-  //регистрация нового пользователя на сервере
-  const createNewUser = async () => {
+  //вход на сайт
+  const loginUser = async (isLogin) => {
 
     //объект с конфигурациями для отправки на сервер
     const requestOptions = {
@@ -32,68 +44,75 @@ export default function AuthState({children}) {
       body: JSON.stringify({email, password, returnSecureToken: true})
     };
 
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAxn_zWcRXpXGZmALtBzZIWwX6oWdoC7KY', requestOptions)
-    //данные для обработки
-    const data = await response.json()
-    localStorage.setItem('time', new Date().getTime())
-    addLocalId(data.localId)
-  }
+    //ссылка на регистрацию
+    let url = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAxn_zWcRXpXGZmALtBzZIWwX6oWdoC7KY'
 
-  //регистрация нового пользователя на сервере
-  const loginUser = async () => {
-
-    //объект с конфигурациями для отправки на сервер
-    const requestOptions = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({email, password, returnSecureToken: true})
-    };
-
-    const response = await fetch('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAxn_zWcRXpXGZmALtBzZIWwX6oWdoC7KY', requestOptions)
-    //данные для обработки
-    const data = await response.json()
-    localStorage.setItem('time', new Date().getTime())
-    addLocalId(data.localId)
-  }
-
-  //проверка залогинен пользователь или нет
-  const checkLogin = () => {
-    //если в localStorage есть time
-    if (localStorage.getItem('time')) {
-      //pastTime - время которое прошло с момента создания 'time'
-      const pastTime = new Date().getTime() - localStorage.getItem('time')
-      //если прошедшее время меньше часа
-      if (pastTime < 3600000) {
-        //console.log(`сессия активна. осталось: ${3600000 - pastTime} localId: ${localId}`)
-      }
-      //если сессия заканчивается
-      if (pastTime < 3000000 || localId) {
-        //обновляем сессию
-        localStorage.setItem('time', new Date().getTime())
-      }
-    } else {
-      //console.log('сессия закончилась')
+    //если isLogin === true
+    if (isLogin) {
+      //ссылка на авторизацию
+      url = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAxn_zWcRXpXGZmALtBzZIWwX6oWdoC7KY'
     }
+
+    //отправляем запрос
+    const response = await fetch(url, requestOptions)
+    //данные для обработки
+    const data = await response.json()
+    //записываем в localStorage время на момент входа на сайт
+    localStorage.setItem('time', new Date().getTime())
+    //записываем в localStorage localId пользователя
+    localStorage.setItem('localId', data.localId)
+    //заносим в state localId пользователя
+    addLocalId(data.localId)
+    //запускаем автоподдержку сессии
+    autoLogin(data.localId)
+    //изменение роутов
+    statusLogin(true)
   }
 
+  //добавляем в state localId пользователя
   const addLocalId = (id) => {
     dispatch({type: 'ADD_LOCAL_ID', id})
-    //console.log(state.localId)
   }
 
-  //-------АВТОЛОГИН
-  const autoLogin = () =>{
-    setInterval(()=>{
-      console.log('autologin')
-    }, 11111000)
+  //поддержка сессии
+  const autoLogin = (dataLocalId) => {
+    const timeLogin = setInterval(() => {
+      //если в state есть localId и localId из state равен localId пришедшему с сервера
+      if (localId || localId === dataLocalId) {
+        //обновляем time в localStorage
+        localStorage.setItem('time', new Date().getTime())
+      }
+      //иначе выходим
+      else {
+        logout()
+        clearInterval(timeLogin)
+      }
+    }, 3600000)
+  }
+
+  //отображение роутов и ссылок
+  const statusLogin = (loginMark) => {
+    dispatch({
+      type: 'IS_LOGIN',
+      loginMark
+    })
+  }
+
+  //выход
+  const logout = () => {
+    dispatch({
+      type: 'LOGOUT'
+    })
+    localStorage.removeItem('time')
+    localStorage.removeItem('localId')
   }
 
   const [state, dispatch] = useReducer(authReducer, initialState)
 
-  const {email, password, localId} = state
+  const {email, password, localId, isLogin} = state
 
   return (
-    <AuthContext.Provider value={{getDataNewUser, createNewUser, loginUser, autoLogin}}>
+    <AuthContext.Provider value={{getDataNewUser, loginUser, logout, isLogin}}>
       {children}
     </AuthContext.Provider>
   )
