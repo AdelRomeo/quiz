@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react'
+import React, {useContext, useState} from 'react'
 import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom'
 import './App.css';
 import Home from "./pages/Home/Home";
@@ -10,12 +10,14 @@ import Drawer from "./componets/Drawer/Drawer";
 import Backdrop from "./componets/Backdrop/Backdrop";
 import Auth from "./pages/Auth/Auth";
 import AuthContext from "./context/auth/authContext";
+import Logout from "./componets/Logout/Logout";
+import Alert from "./componets/Alert/Alert";
 
 function App() {
 
   const [showNavBar, setShowNavBar] = useState(false)
 
-  const {isLogin, logout} = useContext(AuthContext)
+  const {isLogin, logout, showAlert, alertMessage} = useContext(AuthContext)
 
   //если не авторизован
   let routes = (
@@ -34,6 +36,7 @@ function App() {
         <Route path='/question/:name' component={Question}/>
         <Route path='/' exact component={Home}/>
         <Route path='/createQuiz' component={CreateQuiz}/>
+        <Route path='/logout' component={Logout}/>
         <Redirect to='/'/>
       </Switch>
     )
@@ -43,10 +46,10 @@ function App() {
     <QuestionState>
       <CreateQuizState>
         <BrowserRouter>
-          <Drawer showNavBar={showNavBar} setShowNavBar={setShowNavBar} isLogin={isLogin}/>
+          <Drawer showNavBar={showNavBar} setShowNavBar={setShowNavBar} isLogin={isLogin} logout={logout}/>
           {showNavBar ? <Backdrop showNavBar={showNavBar} setShowNavBar={setShowNavBar}/> : null}
+          {!showAlert ? null : <Alert message={alertMessage}/>}
           { routes }
-          <button onClick={logout}>выйти</button>
         </BrowserRouter>
       </CreateQuizState>
     </QuestionState>

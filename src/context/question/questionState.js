@@ -31,6 +31,7 @@ export default function QuestionState({children}) {
 
   useEffect(()=>{
     loadingTests()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   //загрузка тестов с сервера

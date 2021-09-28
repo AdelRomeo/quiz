@@ -8,7 +8,9 @@ export default function AuthState({children}) {
     email: '',
     password: '',
     localId: null,
-    isLogin: false
+    isLogin: false,
+    showAlert: false,
+    alertMessage: ''
   }
 
   useEffect(() => {
@@ -57,16 +59,30 @@ export default function AuthState({children}) {
     const response = await fetch(url, requestOptions)
     //данные для обработки
     const data = await response.json()
-    //записываем в localStorage время на момент входа на сайт
-    localStorage.setItem('time', new Date().getTime())
-    //записываем в localStorage localId пользователя
-    localStorage.setItem('localId', data.localId)
-    //заносим в state localId пользователя
-    addLocalId(data.localId)
-    //запускаем автоподдержку сессии
-    autoLogin(data.localId)
-    //изменение роутов
-    statusLogin(true)
+    //если успешно зашли
+    if (data.localId) {
+      //записываем в localStorage время на момент входа на сайт
+      localStorage.setItem('time', new Date().getTime())
+      //записываем в localStorage localId пользователя
+      localStorage.setItem('localId', data.localId)
+      //заносим в state localId пользователя
+      addLocalId(data.localId)
+      //запускаем автоподдержку сессии
+      autoLogin(data.localId)
+      //изменение роутов
+      statusLogin(true)
+      //показываем алерт
+      toggleAlert(true, 'Вы успешно зашли')
+      setTimeout(()=>{
+        toggleAlert(false)
+      },2200)
+    } else {
+      //показываем алерт
+      toggleAlert(true, 'Данные не корректны')
+      setTimeout(()=>{
+        toggleAlert(false)
+      },2200)
+    }
   }
 
   //добавляем в state localId пользователя
@@ -98,6 +114,15 @@ export default function AuthState({children}) {
     })
   }
 
+  //показ Alert
+  const toggleAlert = (mark, message) => {
+    dispatch({
+        type: 'TOGGLE_ALERT',
+        mark, message
+      }
+    )
+  }
+
   //выход
   const logout = () => {
     dispatch({
@@ -109,10 +134,10 @@ export default function AuthState({children}) {
 
   const [state, dispatch] = useReducer(authReducer, initialState)
 
-  const {email, password, localId, isLogin} = state
+  const {email, password, localId, isLogin, showAlert, alertMessage} = state
 
   return (
-    <AuthContext.Provider value={{getDataNewUser, loginUser, logout, isLogin}}>
+    <AuthContext.Provider value={{getDataNewUser, loginUser, logout, isLogin, showAlert, alertMessage}}>
       {children}
     </AuthContext.Provider>
   )

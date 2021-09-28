@@ -11,6 +11,7 @@ function Auth() {
 
   useEffect(() => {
     getDataNewUser(valueName, valuePas)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [valueName, valuePas])
 
   const handlerNewUser = (event) => {
@@ -29,8 +30,8 @@ function Auth() {
         <input type="text" placeholder='Введите имя' value={valueName} onChange={(event) => setValueName(event.target.value)}/>
         <input type="text" placeholder='Введите пароль' value={valuePas} onChange={(event) => setValuePas(event.target.value)}/>
         <div>
-          <input type="submit" value='Войти' onClick={handlerLoginUser}/>
-          <input type="submit" value='Зарегистрироваться' onClick={handlerNewUser}/>
+          <input type="submit" value='Войти' onClick={handlerLoginUser} disabled={!valueName || !valuePas}/>
+          <input type="submit" value='Зарегистрироваться' onClick={handlerNewUser} disabled={!valueName || !valuePas}/>
         </div>
       </form>
     </div>

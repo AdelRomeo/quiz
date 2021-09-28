@@ -4,7 +4,7 @@ import classes from './Drawer.module.scss'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from '@fortawesome/free-solid-svg-icons';
 
-function Drawer({showNavBar, setShowNavBar, isLogin}) {
+function Drawer({showNavBar, setShowNavBar, isLogin, logout}) {
 
   const cls = [classes.Drawer]
 
@@ -26,6 +26,7 @@ function Drawer({showNavBar, setShowNavBar, isLogin}) {
       <>
         <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/'>Home</Link></li>
         <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/createQuiz'>Create Quiz</Link></li>
+        <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/logout'>Выйти</Link></li>
       </>
     )
   }
