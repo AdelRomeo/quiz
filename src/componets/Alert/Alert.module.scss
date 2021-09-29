@@ -1,17 +1,24 @@
 .Alert {
   position: fixed;
   width: 200px;
-  left: calc(50% - 100px);
-  top: 100px;
+  //left: calc(50% - 100px);
+  top: 0;
+  right: 0;
   text-align: center;
   font-size: 30px;
   color: #ffffff;
-  background: rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  transition: all 2s ease;
+  transition: opacity 2s ease;
 }
 
-.hide{
+.hide {
   opacity: 0;
-  visibility: hidden;
+}
+
+.hideSuccess {
+  background: rgba(73, 252, 38, 0.5);
+}
+
+.hideError {
+  background: rgba(245, 39, 39, 0.5);
 }

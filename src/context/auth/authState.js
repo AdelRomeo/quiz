@@ -73,15 +73,9 @@ export default function AuthState({children}) {
       statusLogin(true)
       //показываем алерт
       toggleAlert(true, 'Вы успешно зашли')
-      setTimeout(()=>{
-        toggleAlert(false)
-      },2200)
     } else {
       //показываем алерт
       toggleAlert(true, 'Данные не корректны')
-      setTimeout(()=>{
-        toggleAlert(false)
-      },2200)
     }
   }
 
@@ -121,6 +115,13 @@ export default function AuthState({children}) {
         mark, message
       }
     )
+    setTimeout(()=>{
+      dispatch({
+          type: 'TOGGLE_ALERT',
+          mark: false
+        }
+      )
+    }, 2200)
   }
 
   //выход
@@ -130,6 +131,8 @@ export default function AuthState({children}) {
     })
     localStorage.removeItem('time')
     localStorage.removeItem('localId')
+
+    toggleAlert(true, 'Вы вышли')
   }
 
   const [state, dispatch] = useReducer(authReducer, initialState)
