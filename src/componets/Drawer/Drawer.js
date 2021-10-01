@@ -16,16 +16,16 @@ function Drawer({showNavBar, setShowNavBar, isLogin, logout}) {
 
   let links = (
     <>
-      <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/'>Home</Link></li>
-      <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/auth'>Auth</Link></li>
+      <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/'>Главная</Link></li>
+      <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/auth'>Авторизация</Link></li>
     </>
   )
 
   if (isLogin){
     links = (
       <>
-        <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/'>Home</Link></li>
-        <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/createQuiz'>Create Quiz</Link></li>
+        <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/'>Главная</Link></li>
+        <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/createQuiz'>Создать тест</Link></li>
         <li onClick={() => setShowNavBar(showNavBar = !showNavBar)}><Link to='/logout'>Выйти</Link></li>
       </>
     )
