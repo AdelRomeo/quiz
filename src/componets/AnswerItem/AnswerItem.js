@@ -20,10 +20,10 @@ function AnswerItem({idAnswer}) {
   }
 
   //правильный вариант ответа
-  const {rightAnswer} = testsList[testId][activeQuestion]
+  const rightAnswer = testsList[testId][activeQuestion].rightAnswerId
 
   return (
-    <li className={cls.join(' ')} onClick={() => {answerToQuestion(rightAnswer, idAnswer); }}>
+    <li className={cls.join(' ')} onClick={() => {answerToQuestion(rightAnswer-1, idAnswer)}}>
       <p>{testsList[testId][activeQuestion].answerList[idAnswer]}</p>
     </li>
   )

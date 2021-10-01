@@ -7,6 +7,8 @@ function AnswerList() {
 
   const {testsList, testId, activeQuestion} = useContext(QuestionContext)
 
+  //console.log('list', testsList[testId][activeQuestion].answerList)
+
   return (
     <ul className={classes.AnswerList}>
       {

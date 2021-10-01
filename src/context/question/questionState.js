@@ -117,6 +117,7 @@ export default function QuestionState({children}) {
     await fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
   }
 
+  //показ лоадера
   const setLoading = ()=>{
     dispatch({
       type: 'LOADING'
