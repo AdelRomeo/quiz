@@ -26,6 +26,7 @@ export default function AuthState({children}) {
         statusLogin(true)
       }
     }
+    // eslint-disable-next-line
   }, [])
 
   //получение данных из заполненных полей

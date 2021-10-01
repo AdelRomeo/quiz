@@ -17,7 +17,7 @@ function Alert({message}) {
     setTimeout(() => {
       setHideAlert(classes.hide)
     }, 1000)
-  }, [])
+  }, [message])
 
   return (
     <div className={`${classes.Alert} ${hideAlert} ${statusAlert}`}>{message}</div>
