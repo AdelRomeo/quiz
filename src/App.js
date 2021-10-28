@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react'
 import {Switch, Route, Redirect, BrowserRouter} from 'react-router-dom'
-import './App.css';
+import './App.scss';
 import Home from "./pages/Home/Home";
 import Question from "./pages/Question/Question";
 import QuestionState from "./context/question/questionState";
@@ -9,9 +9,9 @@ import CreateQuizState from "./context/createQuiz/createQuizState";
 import Drawer from "./componets/Drawer/Drawer";
 import Backdrop from "./componets/Backdrop/Backdrop";
 import Auth from "./pages/Auth/Auth";
-import AuthContext from "./context/auth/authContext";
 import Logout from "./componets/Logout/Logout";
 import Alert from "./componets/Alert/Alert";
+import AuthContext from "./context/auth/authContext";
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
   )
 
   //если авторизован
-  if (isLogin){
+  if (isLogin) {
     routes = (
       <Switch>
         <Route path='/question/:name' component={Question}/>
@@ -49,11 +49,11 @@ function App() {
           <Drawer showNavBar={showNavBar} setShowNavBar={setShowNavBar} isLogin={isLogin} logout={logout}/>
           {showNavBar ? <Backdrop showNavBar={showNavBar} setShowNavBar={setShowNavBar}/> : null}
           {!showAlert ? null : <Alert message={alertMessage}/>}
-          { routes }
+          {routes}
         </BrowserRouter>
       </CreateQuizState>
     </QuestionState>
-  );
+  )
 }
 
 export default App;

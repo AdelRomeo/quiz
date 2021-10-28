@@ -25,7 +25,7 @@ export default function CreateQuizState({children}) {
     //готовый вопрос
     quizItem: {},
     //готовый тест
-    quiz: []
+    quiz: [],
   }
 
   const [state, dispatch] = useReducer(CreateQuizReducer, initialState)
@@ -72,6 +72,8 @@ export default function CreateQuizState({children}) {
       }
     })
 
+    validationForm(question, answerList)
+
     dispatch({
       type: 'CREATE_QUIZ_ITEM',
       question, answerList, rightAnswerId
@@ -94,6 +96,17 @@ export default function CreateQuizState({children}) {
       type: 'RESET_QUIZ',
       createTemplate
     })
+  }
+
+  //валидация формы
+  const validationForm = (que, list) => {
+    const res = list.filter(word => word.length > 3)
+
+    if (que.question.length > 3 && res.length === list.length){
+      console.log('All good')
+    } else {
+      console.log('Some error')
+    }
   }
 
   const {rightAnswerId, activeItem, questionItem, quiz} = state

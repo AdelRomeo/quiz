@@ -17,7 +17,7 @@
   width: fit-content;
   min-width: 600px;
   flex-direction: column;
-  background: darkcyan;
+  background: #ea8b5e;
   padding: 20px;
   border-radius: 10px;
 }
@@ -34,13 +34,20 @@
   border: none;
   cursor: pointer;
   color: #2a2828;
+  transition: box-shadow 500ms ease;
 }
 
 .btnAdd{
-  background: #75daf8;
+  background: #ee6f2e;
+  &:hover{
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.33);
+  }
 }
 
 .btnCreate{
-  background: #2babdb;
+  background: #e35006;
+  &:hover{
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.33);
+  }
 }
 

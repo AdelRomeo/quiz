@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AuthState from "./context/auth/authState";
@@ -8,7 +8,7 @@ import AuthState from "./context/auth/authState";
 ReactDOM.render(
   <>
     <AuthState>
-      <App />
+      <App/>
     </AuthState>
   </>,
   document.getElementById('root')
