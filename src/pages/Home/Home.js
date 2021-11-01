@@ -1,8 +1,8 @@
 import React, {useContext} from 'react'
 import classes from './Home.module.scss'
-import Title from "../../componets/Title/Title";
-import QuizList from "../../componets/QuizList/QuizList";
-import Loader from "../../componets/Loader/Loader";
+import Title from "../../components/Title/Title";
+import QuizList from "../../components/QuizList/QuizList";
+import Loader from "../../components/Loader/Loader";
 import QuestionContext from "../../context/question/questionContext";
 
 function Home() {

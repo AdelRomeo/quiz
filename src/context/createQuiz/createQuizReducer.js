@@ -15,6 +15,8 @@ export default function CreateQuizReducer(state, action) {
     case 'RESET_QUIZ': {
       return {...state, questionItem: action.createTemplate()}
     }
+    case 'ALERT_WRONG_FORM':
+      return {...state, flagWrongForm: !state.flagWrongForm}
     default:
       return state
   }

@@ -1,14 +1,15 @@
 import React, {useContext} from 'react'
 import classes from './CreateQuiz.module.scss'
-import Title from "../../componets/Title/Title";
+import Title from "../../components/Title/Title";
 import CreateQuizContext from "../../context/createQuiz/createQuizContext";
-import Select from "../../componets/Select/Select";
-import Input from "../../componets/Input/Input";
+import Select from "../../components/Select/Select";
+import Input from "../../components/Input/Input";
+import AlertForm from "../../components/AlertForm/AlertForm";
 import QuestionContext from "../../context/question/questionContext";
 
 function CreateQuiz() {
 
-  const {createQuestion, quiz} = useContext(CreateQuizContext)
+  const {createQuestion, quiz, flagWrongForm} = useContext(CreateQuizContext)
   const {addNewTest} = useContext(QuestionContext)
 
 
@@ -45,6 +46,7 @@ function CreateQuiz() {
   return (
     <article className={classes.CreateQuiz}>
       <Title title='Создайте свой тест'/>
+      {flagWrongForm && <AlertForm/>}
       <form className={classes.Form}>
         {renderInputs()}
         {renderSelect()}

@@ -6,11 +6,11 @@ import Question from "./pages/Question/Question";
 import QuestionState from "./context/question/questionState";
 import CreateQuiz from "./pages/CreateQuiz/CreateQuiz";
 import CreateQuizState from "./context/createQuiz/createQuizState";
-import Drawer from "./componets/Drawer/Drawer";
-import Backdrop from "./componets/Backdrop/Backdrop";
+import Drawer from "./components/Drawer/Drawer";
+import Backdrop from "./components/Backdrop/Backdrop";
 import Auth from "./pages/Auth/Auth";
-import Logout from "./componets/Logout/Logout";
-import Alert from "./componets/Alert/Alert";
+import Logout from "./components/Logout/Logout";
+import Alert from "./components/Alert/Alert";
 import AuthContext from "./context/auth/authContext";
 
 function App() {

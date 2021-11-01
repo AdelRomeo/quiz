@@ -1,10 +1,10 @@
 import React, {useContext} from 'react'
-import AnswerList from "../../componets/AnswerList/AnswerList";
+import AnswerList from "../../components/AnswerList/AnswerList";
 import classes from './Question.module.scss'
 import QuestionContext from "../../context/question/questionContext";
-import QuizFinished from "../../componets/QuizFinished/QuizFinished";
-import Title from "../../componets/Title/Title";
-import Loader from "../../componets/Loader/Loader";
+import QuizFinished from "../../components/QuizFinished/QuizFinished";
+import Title from "../../components/Title/Title";
+import Loader from "../../components/Loader/Loader";
 
 function Question() {
 

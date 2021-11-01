@@ -26,6 +26,8 @@ export default function CreateQuizState({children}) {
     quizItem: {},
     //готовый тест
     quiz: [],
+    //показ сообщения о неправильно заполненной форме
+    flagWrongForm: false
   }
 
   const [state, dispatch] = useReducer(CreateQuizReducer, initialState)
@@ -72,15 +74,12 @@ export default function CreateQuizState({children}) {
       }
     })
 
-    validationForm(question, answerList)
-
     dispatch({
       type: 'CREATE_QUIZ_ITEM',
       question, answerList, rightAnswerId
     })
-
-    addQuizItem()
-    resetQuiz()
+    //валидация и добавление данных
+    validationForm(question, answerList)
   }
 
   //добавление вопроса
@@ -99,22 +98,42 @@ export default function CreateQuizState({children}) {
   }
 
   //валидация формы
+  //que - вопрос. list - список ответов
   const validationForm = (que, list) => {
-    const res = list.filter(word => word.length > 3)
+    //в validList попадают ответы длинна которых >= 1
+    const validList = list.filter(word => word.length >= 1)
 
-    if (que.question.length > 3 && res.length === list.length){
-      console.log('All good')
+    //если длина вопроса больше трех символов и все ответы прошли валидацию
+    if (que.question.length > 3 && validList.length === list.length) {
+      //добавляем вопрос
+      addQuizItem()
+      //сбрасываем форму
+      resetQuiz()
     } else {
-      console.log('Some error')
+      //показываем сообщение
+      showAlertWrongForm()
     }
   }
 
-  const {rightAnswerId, activeItem, questionItem, quiz} = state
+  //показ сообщения о неправильно заполненной форме
+  const showAlertWrongForm = () => {
+    dispatch({
+      type: 'ALERT_WRONG_FORM'
+    })
+    const timer = setTimeout(() => {
+      dispatch({
+        type: 'ALERT_WRONG_FORM'
+      })
+      clearTimeout(timer)
+    }, 2000)
+  }
+
+  const {rightAnswerId, activeItem, questionItem, quiz, flagWrongForm} = state
 
   return (
     <CreateQuizContext.Provider value={
       {
-        rightAnswerId, activeItem, questionItem, quiz,
+        rightAnswerId, activeItem, questionItem, quiz, flagWrongForm,
         setRightAnswerId, changeQuestion, createQuestion
       }
     }>
