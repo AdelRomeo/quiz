@@ -6,12 +6,12 @@ import Select from "../../components/Select/Select";
 import Input from "../../components/Input/Input";
 import AlertForm from "../../components/AlertForm/AlertForm";
 import QuestionContext from "../../context/question/questionContext";
+import {Link} from "react-router-dom";
 
 function CreateQuiz() {
 
-  const {createQuestion, quiz, flagWrongForm} = useContext(CreateQuizContext)
+  const {createQuestion, quiz, flagWrongForm, successFetch} = useContext(CreateQuizContext)
   const {addNewTest} = useContext(QuestionContext)
-
 
   const renderInputs = () => {
     return <Input/>
@@ -43,6 +43,14 @@ function CreateQuiz() {
     addNewTest(quiz)
   }
 
+  const renderButtonFinishQuiz = (position) => {
+    let link = <button className={`${classes.btn} ${classes.btnCreate}`} onClick={onCreateQuizHandler}>Создать тест</button>
+    if (position) {
+      link = <button className={`${classes.btn} ${classes.btnCreate}`} onClick={onCreateQuizHandler}><Link to='/'>Создать тест</Link></button>
+    }
+    return link
+  }
+
   return (
     <article className={classes.CreateQuiz}>
       <Title title='Создайте свой тест'/>
@@ -52,9 +60,10 @@ function CreateQuiz() {
         {renderSelect()}
         <div className={classes.btnContainer}>
           <button className={`${classes.btn} ${classes.btnAdd}`} onClick={onAddQuestionHandler}>Добавить вопрос</button>
-          <button className={`${classes.btn} ${classes.btnCreate}`} onClick={onCreateQuizHandler}>Создать тест</button>
+          {renderButtonFinishQuiz(successFetch)}
         </div>
       </form>
+      {/*{successFetch && <div className={classes.messageSuccess}>Вопрос успешно добавлен</div>}*/}
     </article>
   )
 }

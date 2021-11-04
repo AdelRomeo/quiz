@@ -27,7 +27,9 @@ export default function CreateQuizState({children}) {
     //готовый тест
     quiz: [],
     //показ сообщения о неправильно заполненной форме
-    flagWrongForm: false
+    flagWrongForm: false,
+    //показ сообщения об успешном добавлении нового теста
+    successFetch: false
   }
 
   const [state, dispatch] = useReducer(CreateQuizReducer, initialState)
@@ -84,9 +86,18 @@ export default function CreateQuizState({children}) {
 
   //добавление вопроса
   const addQuizItem = () => {
+    showSuccessFetch()
     dispatch({
       type: 'ADD_QUIZ_ITEM'
     })
+  }
+
+  //возможность перехода на главную страницу по клику на кнопку отправки теста
+  const showSuccessFetch = () => {
+    dispatch({
+        type: 'SUCCESS_FETCH'
+      }
+    )
   }
 
   //сброс состояние вопроса
@@ -128,12 +139,12 @@ export default function CreateQuizState({children}) {
     }, 2000)
   }
 
-  const {rightAnswerId, activeItem, questionItem, quiz, flagWrongForm} = state
+  const {rightAnswerId, activeItem, questionItem, quiz, flagWrongForm, successFetch} = state
 
   return (
     <CreateQuizContext.Provider value={
       {
-        rightAnswerId, activeItem, questionItem, quiz, flagWrongForm,
+        rightAnswerId, activeItem, questionItem, quiz, flagWrongForm, successFetch,
         setRightAnswerId, changeQuestion, createQuestion
       }
     }>

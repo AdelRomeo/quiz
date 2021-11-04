@@ -22,14 +22,14 @@ export default function QuestionState({children}) {
     //количество правильных ответов
     sumRightAnswer: 0,
     //показ лоадера на время загрузки
-    loading: true
+    loading: true,
   }
 
 
   //расшариваем данные
   const [state, dispatch] = useReducer(questionReducer, initialState)
 
-  useEffect(()=>{
+  useEffect(() => {
     loadingTests()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -118,7 +118,7 @@ export default function QuestionState({children}) {
   }
 
   //показ лоадера
-  const setLoading = ()=>{
+  const setLoading = () => {
     dispatch({
       type: 'LOADING'
     })
