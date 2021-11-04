@@ -17,6 +17,8 @@ export default function CreateQuizReducer(state, action) {
     }
     case 'ALERT_WRONG_FORM':
       return {...state, flagWrongForm: !state.flagWrongForm}
+    case 'SUCCESS_FETCH':
+      return {...state, successFetch: true}
     default:
       return state
   }
