@@ -1,5 +1,4 @@
 .CreateQuiz {
-  position: relative;
   box-sizing: border-box;
   text-align: center;
   padding-top: 100px;
@@ -48,7 +47,7 @@ a {
   background: #ee6f2e;
 
   &:hover {
-    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.33);
+    box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.33);
   }
 }
 
@@ -56,16 +55,13 @@ a {
   background: #e35006;
 
   &:hover {
-    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.33);
+    box-shadow: 0 1px 8px 1px rgba(0, 0, 0, 0.33);
   }
 }
 
-.messageSuccess {
-  position: absolute;
-  left: 50%;
-  top: 300px;
-  width: 200px;
-  height: 50px;
-  background: #5041b2;
+.Wrapper{
+  position: relative;
+  width: max-content;
+  margin: 0 auto;
 }
 

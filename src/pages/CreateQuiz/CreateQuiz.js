@@ -4,7 +4,7 @@ import Title from "../../components/Title/Title";
 import CreateQuizContext from "../../context/createQuiz/createQuizContext";
 import Select from "../../components/Select/Select";
 import Input from "../../components/Input/Input";
-import AlertForm from "../../components/AlertForm/AlertForm";
+import AlertForm from "../../components/Alerts/AlertForm/AlertForm";
 import QuestionContext from "../../context/question/questionContext";
 import {Link} from "react-router-dom";
 
@@ -19,15 +19,16 @@ function CreateQuiz() {
 
   //конфигурация для рендера <select>
   const renderSelect = () => {
-    return <Select config={{
-      label: 'Выберите правильный вариант ответа',
-      options: {
-        value1: 1,
-        value2: 2,
-        value3: 3,
-        value4: 4
+    return <Select config={
+      {
+        label: 'Выберите правильный вариант ответа',
+        options: {
+          value1: 1,
+          value2: 2,
+          value3: 3,
+          value4: 4
+        }
       }
-    }
     }/>
   }
 
@@ -53,17 +54,19 @@ function CreateQuiz() {
 
   return (
     <article className={classes.CreateQuiz}>
-      <Title title='Создайте свой тест'/>
-      {flagWrongForm && <AlertForm/>}
-      <form className={classes.Form}>
-        {renderInputs()}
-        {renderSelect()}
-        <div className={classes.btnContainer}>
-          <button className={`${classes.btn} ${classes.btnAdd}`} onClick={onAddQuestionHandler}>Добавить вопрос</button>
-          {renderButtonFinishQuiz(successFetch)}
-        </div>
-      </form>
-      {/*{successFetch && <div className={classes.messageSuccess}>Вопрос успешно добавлен</div>}*/}
+      <div className={classes.Wrapper}>
+        <Title title='Создайте свой тест'/>
+        <form className={classes.Form}>
+          {renderInputs()}
+          {renderSelect()}
+          <div className={classes.btnContainer}>
+            <button className={`${classes.btn} ${classes.btnAdd}`} onClick={onAddQuestionHandler}>Добавить вопрос</button>
+            {renderButtonFinishQuiz(successFetch)}
+          </div>
+        </form>
+        {flagWrongForm && <AlertForm success={false} descr={'Данные введины некорректно'}/>}
+        {successFetch && <AlertForm success={true} descr={'Вопрос добавлен'}/>}
+      </div>
     </article>
   )
 }

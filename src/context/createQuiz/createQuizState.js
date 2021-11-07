@@ -98,6 +98,13 @@ export default function CreateQuizState({children}) {
         type: 'SUCCESS_FETCH'
       }
     )
+    let timer = setTimeout(() => {
+      dispatch({
+          type: 'SUCCESS_FETCH'
+        }
+      )
+      clearTimeout(timer)
+    }, 3000)
   }
 
   //сброс состояние вопроса
@@ -136,7 +143,7 @@ export default function CreateQuizState({children}) {
         type: 'ALERT_WRONG_FORM'
       })
       clearTimeout(timer)
-    }, 2000)
+    }, 3000)
   }
 
   const {rightAnswerId, activeItem, questionItem, quiz, flagWrongForm, successFetch} = state

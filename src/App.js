@@ -10,7 +10,7 @@ import Drawer from "./components/Drawer/Drawer";
 import Backdrop from "./components/Backdrop/Backdrop";
 import Auth from "./pages/Auth/Auth";
 import Logout from "./components/Logout/Logout";
-import Alert from "./components/Alert/Alert";
+import Alert from "./components/Alerts/Alert/Alert";
 import AuthContext from "./context/auth/authContext";
 
 function App() {
