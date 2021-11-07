@@ -64,8 +64,8 @@ function CreateQuiz() {
             {renderButtonFinishQuiz(successFetch)}
           </div>
         </form>
-        {flagWrongForm && <AlertForm success={false} descr={'Данные введины некорректно'}/>}
-        {successFetch && <AlertForm success={true} descr={'Вопрос добавлен'}/>}
+        {flagWrongForm ? <AlertForm success={false} descr={'Данные введины некорректно'}/> : null}
+        {successFetch ? <AlertForm success={true} descr={'Вопрос добавлен'}/> : null}
       </div>
     </article>
   )
