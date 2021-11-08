@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from 'react'
+import React, {useReducer} from 'react'
 import QuestionContext from "./questionContext";
 import questionReducer from "./questionReducer";
 
@@ -22,20 +22,32 @@ export default function QuestionState({children}) {
     //количество правильных ответов
     sumRightAnswer: 0,
     //показ лоадера на время загрузки
-    loading: true,
+    loading: true
   }
 
+  //сброс state
+  const defState = () => {
+    dispatch({
+      type: 'DEFAULT_STATE',
+      testId: 0,
+      selectedAnswer: null,
+      answerFlag: false,
+      activeQuestion: 0,
+      quizFinished: false,
+      activeQuiz: null,
+      sumRightAnswer: 0,
+      loading: true
+    })
+  }
 
   //расшариваем данные
   const [state, dispatch] = useReducer(questionReducer, initialState)
 
-  useEffect(() => {
-    loadingTests()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   //загрузка тестов с сервера
   const loadingTests = async () => {
+
+    defState()
+
     const testsList = []
 
     const response = await fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json')
@@ -81,7 +93,7 @@ export default function QuestionState({children}) {
     setTimeout(() => {
       //если номер вопроса в тесте больше либо равен длине теста
       if (activeQuestion >= testsList[testId].length - 1) {
-        quizIsFinished()
+        quizIsFinished(true)
       }
       dispatch({
         type: 'NEXT_QUESTION',
@@ -91,9 +103,10 @@ export default function QuestionState({children}) {
   }
 
   //тест окончен
-  const quizIsFinished = () => {
+  const quizIsFinished = (isFinish) => {
     dispatch({
-      type: 'QUIZ_FINISHED'
+      type: 'QUIZ_FINISHED',
+      isFinish
     })
   }
 
@@ -105,16 +118,17 @@ export default function QuestionState({children}) {
   }
 
   //добавление нового теста
-  const addNewTest = async (test) => {
+  const addNewTest = async (quiz) => {
 
-    //объект с конфигурациями для отправки на сервер
-    const requestOptions = {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(test)
-    };
-
-    await fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
+    if (quiz.length > 0) {
+      //объект с конфигурациями для отправки на сервер
+      const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(quiz)
+      }
+      await fetch('https://quiz-fb3e9-default-rtdb.europe-west1.firebasedatabase.app/quiz.json', requestOptions)
+    }
   }
 
   //показ лоадера
@@ -136,7 +150,7 @@ export default function QuestionState({children}) {
         answerFlag, sumRightAnswer, loading,
         activeQuestion, quizFinished,
         getQuizId, answerToQuestion,
-        addNewTest, loadingTests
+        addNewTest, loadingTests, quizIsFinished, defState
       }}>
       {children}
     </QuestionContext.Provider>

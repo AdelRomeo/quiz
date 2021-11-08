@@ -6,9 +6,8 @@ import Select from "../../components/Select/Select";
 import Input from "../../components/Input/Input";
 import AlertForm from "../../components/Alerts/AlertForm/AlertForm";
 import QuestionContext from "../../context/question/questionContext";
-import {Link} from "react-router-dom";
 
-function CreateQuiz() {
+function CreateQuiz(props) {
 
   const {createQuestion, quiz, flagWrongForm, successFetch} = useContext(CreateQuizContext)
   const {addNewTest} = useContext(QuestionContext)
@@ -38,18 +37,12 @@ function CreateQuiz() {
     createQuestion()
   }
 
-  const onCreateQuizHandler = event => {
+  const onCreateQuizHandler = async event => {
     event.preventDefault()
 
-    addNewTest(quiz)
-  }
+    await addNewTest(quiz)
+    props.history.push('/')
 
-  const renderButtonFinishQuiz = (position) => {
-    let link = <button className={`${classes.btn} ${classes.btnCreate}`} onClick={onCreateQuizHandler}>Создать тест</button>
-    if (position) {
-      link = <button className={`${classes.btn} ${classes.btnCreate}`} onClick={onCreateQuizHandler}><Link to='/'>Создать тест</Link></button>
-    }
-    return link
   }
 
   return (
@@ -61,11 +54,11 @@ function CreateQuiz() {
           {renderSelect()}
           <div className={classes.btnContainer}>
             <button className={`${classes.btn} ${classes.btnAdd}`} onClick={onAddQuestionHandler}>Добавить вопрос</button>
-            {renderButtonFinishQuiz(successFetch)}
+            <button className={`${classes.btn} ${classes.btnCreate}`} onClick={onCreateQuizHandler}>Создать тест</button>
           </div>
         </form>
-        {flagWrongForm && <AlertForm success={false} descr={'Данные введины некорректно'}/>}
-        {successFetch && <AlertForm success={true} descr={'Вопрос добавлен'}/>}
+        {flagWrongForm ? <AlertForm success={false} descr={'Данные введины некорректно'}/> : null}
+        {successFetch ? <AlertForm success={true} descr={'Вопрос добавлен'}/> : null}
       </div>
     </article>
   )

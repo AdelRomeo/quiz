@@ -19,6 +19,8 @@ export default function CreateQuizReducer(state, action) {
       return {...state, flagWrongForm: !state.flagWrongForm}
     case 'SUCCESS_FETCH':
       return {...state, successFetch: !state.successFetch}
+    case 'DISABLED_MAIN_PAGE':
+      return {...state, goToMainPage: false, quiz: [], quizItem: {}}
     default:
       return state
   }

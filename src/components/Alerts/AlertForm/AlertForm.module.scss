@@ -11,16 +11,14 @@
   padding: 0 5px;
   background: #b3e8b3;
   color: #000000;
+  animation-duration: 3200ms;
   animation-name: visible;
-  animation-duration: 3s;
 }
 
 .AlertNoFetch {
   left: 0;
   width: 300px;
   background: #f57b7b;
-  animation-name: visible;
-  animation-duration: 3s;
 }
 
 @keyframes visible {
@@ -28,10 +26,10 @@
     opacity: 0;
   }
   30% {
-    opacity: 100%;
+    opacity: 1;
   }
   60% {
-    opacity: 100%;
+    opacity: 1;
   }
   100% {
     opacity: 0;
