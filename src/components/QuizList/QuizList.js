@@ -6,7 +6,7 @@ import QuestionContext from "../../context/question/questionContext";
 //список тестов
 function QuizList() {
 
-  //список тестов и функция меняющая подгружаемый тест
+  //список тестов, функция меняющая подгружаемый тест, функция очищающая форму
   const {testsList, getQuizId} = useContext(QuestionContext)
 
   return (

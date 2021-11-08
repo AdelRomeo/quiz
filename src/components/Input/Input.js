@@ -4,18 +4,13 @@ import classes from "./Input.module.scss";
 
 function Input() {
 
-  const {changeQuestion, questionItem, activeItem} = useContext(CreateQuizContext)
+  const {changeQuestion, questionItem} = useContext(CreateQuizContext)
 
   return (
     //перебираем все перданные элементы объекта
     Object.keys(questionItem).map((item, index) => {
 
       const {type, placeholder, value} = questionItem[item]
-
-      //если элемент с которым сейчас взаимодействуем и элемент в списке объекта равны
-      if (item === activeItem) {
-        //меняем значение только для него
-      }
 
       //строка для объединения классов
       let cls = ''

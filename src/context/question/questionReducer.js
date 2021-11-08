@@ -1,4 +1,9 @@
+
+
 export default function QuestionReducer(state, action) {
+
+  const {testId, selectedAnswer, answerFlag, activeQuestion, quizFinished, activeQuiz, sumRightAnswer, loading} = action
+
   switch (action.type) {
     case 'LOADING_TEST_LIST':
       return {...state, testsList: action.testsList}
@@ -11,9 +16,11 @@ export default function QuestionReducer(state, action) {
     case 'NEXT_QUESTION':
       return {...state, selectedAnswer: null, activeQuestion: action.activeQuestion}
     case 'QUIZ_FINISHED':
-      return {...state, quizFinished: true}
+      return {...state, quizFinished: action.isFinish}
     case 'LOADING':
       return {...state, loading: false}
+    case 'DEFAULT_STATE':
+      return {...state, testId, selectedAnswer, answerFlag, activeQuestion, quizFinished, activeQuiz, sumRightAnswer, loading}
     default:
       return state
   }

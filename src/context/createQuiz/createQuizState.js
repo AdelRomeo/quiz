@@ -29,7 +29,7 @@ export default function CreateQuizState({children}) {
     //показ сообщения о неправильно заполненной форме
     flagWrongForm: false,
     //показ сообщения об успешном добавлении нового теста
-    successFetch: false
+    successFetch: false,
   }
 
   const [state, dispatch] = useReducer(CreateQuizReducer, initialState)
@@ -152,7 +152,7 @@ export default function CreateQuizState({children}) {
     <CreateQuizContext.Provider value={
       {
         rightAnswerId, activeItem, questionItem, quiz, flagWrongForm, successFetch,
-        setRightAnswerId, changeQuestion, createQuestion
+        setRightAnswerId, changeQuestion, createQuestion, resetQuiz
       }
     }>
       {children}
