@@ -27,8 +27,8 @@ function Auth() {
   return (
     <div className={classes.Auth}>
       <form>
-        <input type="text" placeholder='Введите имя' value={valueName} onChange={(event) => setValueName(event.target.value)}/>
-        <input type="text" placeholder='Введите пароль' value={valuePas} onChange={(event) => setValuePas(event.target.value)}/>
+        <input type="text" placeholder='Введите имя' value={valueName} onChange={event => setValueName(event.target.value)}/>
+        <input type="text" placeholder='Введите пароль' value={valuePas} onChange={event => setValuePas(event.target.value)}/>
         <div>
           <input type="submit" value='Войти' onClick={handlerLoginUser} disabled={!valueName || !valuePas}/>
           <input type="submit" value='Зарегистрироваться' onClick={handlerNewUser} disabled={!valueName || !valuePas}/>
