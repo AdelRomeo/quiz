@@ -14,8 +14,8 @@ export default function AuthState({children}) {
   }
 
   useEffect(() => {
-    //если в localStorage есть 'time'
-    if (localStorage.getItem('time')) {
+    //если в localStorage есть 'localId'
+    if (localStorage.getItem('localId')) {
       //pastTime - время которое прошло с момента создания 'time'
       const pastTime = new Date().getTime() - localStorage.getItem('time')
       //если прошло больше часа
@@ -23,6 +23,8 @@ export default function AuthState({children}) {
         //разлогиниваемся
         logout()
       } else {
+        addLocalId(localStorage.getItem('localId'))
+        autoLogin(localStorage.getItem('localId'))
         statusLogin(true)
       }
     }
@@ -86,19 +88,12 @@ export default function AuthState({children}) {
   }
 
   //поддержка сессии
-  const autoLogin = (dataLocalId) => {
-    const timeLogin = setInterval(() => {
-      //если в state есть localId и localId из state равен localId пришедшему с сервера
-      if (localId || localId === dataLocalId) {
-        //обновляем time в localStorage
-        localStorage.setItem('time', new Date().getTime())
-      }
-      //иначе выходим
-      else {
-        logout()
-        clearInterval(timeLogin)
-      }
-    }, 3600000)
+  const autoLogin = () => {
+    //обновляем time в localStorage
+    localStorage.setItem('time', new Date().getTime())
+    setInterval(() => {
+      localStorage.setItem('time', new Date().getTime())
+    }, 3500000)
   }
 
   //отображение роутов и ссылок
@@ -116,7 +111,7 @@ export default function AuthState({children}) {
         mark, message
       }
     )
-    setTimeout(()=>{
+    setTimeout(() => {
       dispatch({
           type: 'TOGGLE_ALERT',
           mark: false
@@ -138,7 +133,7 @@ export default function AuthState({children}) {
 
   const [state, dispatch] = useReducer(authReducer, initialState)
 
-  const {email, password, localId, isLogin, showAlert, alertMessage} = state
+  const {email, password, isLogin, showAlert, alertMessage} = state
 
   return (
     <AuthContext.Provider value={{getDataNewUser, loginUser, logout, isLogin, showAlert, alertMessage}}>
