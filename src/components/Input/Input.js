@@ -12,26 +12,39 @@ function Input() {
 
       const {type, placeholder, value} = questionItem[item]
 
-      //строка для объединения классов
-      let cls = ''
+      //строка для объединения классов ипутов
+      let clsDescr = ''
 
       //если нолевой элемент - вопрос
       if (index === 0) {
-        cls = [classes.Item, classes.Question]
+        clsDescr = [classes.Item, classes.Question]
       } else {
         //остальные элементы - варианты ответа
-        cls = [classes.Item, classes.Answer]
+        clsDescr = [classes.Item, classes.Answer]
+      }
+
+      //строка для объединения классов лейблов
+      let clsAnim = [classes.LabelIn]
+      //index === 0 - вопрос
+      if (index === 0) {
+        clsAnim.push(classes.LabelOutTitle)
+      }
+      //если в инпут что то введино уводим лейбл
+      if (value.length > 0) {
+        clsAnim.push(classes.LabelOut)
       }
 
       return (
-        <input
-          key={index}
-          className={cls.join(' ')}
-          type={type}
-          placeholder={placeholder}
-          onChange={(event) => changeQuestion(item, event.target.value)}
-          value={value}
-        />
+        <div className={classes.Wrapper} key={index}>
+          <label htmlFor={index} className={clsAnim.join(' ')}>{placeholder}</label>
+          <input
+            id={index}
+            className={clsDescr.join(' ')}
+            type={type}
+            onChange={(event) => changeQuestion(item, event.target.value)}
+            value={value}
+          />
+        </div>
       )
     })
   )

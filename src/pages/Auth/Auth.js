@@ -40,13 +40,13 @@ function Auth() {
       <form>
         <div>
           <label htmlFor='inputName' className={clsName.join(' ')}>Введите имя</label>
-          <input id='inputName' type="text" className={classes.inputForm} value={valueName} onChange={event => setValueName(event.target.value)}/></div>
+          <input id='inputName' type='text' className={classes.inputForm} value={valueName} onChange={event => setValueName(event.target.value)}/></div>
         <div>
           <label htmlFor='inputPass' className={clsPass.join(' ')}>Введите пароль</label>
-          <input id='inputPass' type="text" className={classes.inputForm} value={valuePas} onChange={event => setValuePas(event.target.value)}/></div>
+          <input id='inputPass' type='text' className={classes.inputForm} value={valuePas} onChange={event => setValuePas(event.target.value)}/></div>
         <div>
-          <input type="submit" value='Войти' onClick={handlerLoginUser} disabled={!valueName || !valuePas}/>
-          <input type="submit" value='Зарегистрироваться' onClick={handlerNewUser} disabled={!valueName || !valuePas}/>
+          <input type='submit' value='Войти' onClick={handlerLoginUser} disabled={!valueName || !valuePas}/>
+          <input type='submit' value='Зарегистрироваться' onClick={handlerNewUser} disabled={!valueName || !valuePas}/>
         </div>
       </form>
     </div>
